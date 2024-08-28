@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Received Webhooks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        // Function to auto-refresh the page every 5 seconds
+        function autoRefreshPage() {
+            setTimeout(function(){
+                location.reload();
+            }, 5000);  // 5000 milliseconds = 5 seconds
+        }
+    </script>
+</head>
+<body onload="autoRefreshPage()">
+    <div class="container">
+        <h1>Received Webhooks</h1>
+        {% if webhooks %}
+            <ul>
+                {% for webhook in webhooks %}
+                    <li><pre>{{ webhook | tojson(indent=2) }}</pre></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No webhooks received yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
